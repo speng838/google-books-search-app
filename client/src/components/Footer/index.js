@@ -1,12 +1,16 @@
 import React from "react";
 import "./style.css";
 
-const Footer = () => (
-	<footer className = "page-footer">
-		<div className = "container-fluid text-center">
-			<p>copyright 2019</p>
-		</div>	
-	</footer>
-);
+function Footer() {
+  return (
+
+    <footer className="footer mt-auto py-3">
+      <div className="container">
+        <span is="copyright" class="text-muted">&copy; Copyright 2019</span>
+      </div>
+    </footer>
+
+  );
+}
 
 export default Footer;

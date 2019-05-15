@@ -1,10 +1,8 @@
-.jumbotron{
-    background-image: url("./bookshelf.jpg");
+.jumbotron {
+    background-image: url("https://cdn-images-1.medium.com/max/1600/0*kcnamVBpM1mWyD5W");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 300px; 
-    width: 100%;
-    padding-top: 10; 
-    text-align: center
-}
+    height: 200px;
+    padding: 0rem 0rem;
+  }

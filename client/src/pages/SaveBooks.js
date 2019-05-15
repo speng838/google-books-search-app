@@ -1,40 +1,45 @@
 import React, { Component } from "react";
 import API from "../utils/API";
+import { Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
-import { Container} from "../components/Grid";
-import SavedResult from "../components/SavedResult"
+import SavedBooks from "../components/SavedBooks";
 
-class SaveBook extends Component {
-    state = {
-        savedBooks: []
-    };
+class SaveBooks extends Component {
+  state = {
+    results: []
+  };
 
-    //when this component mounts, grab all books that were save to the database 
-    componentDidMount() {
-        API.getBooks()
-            .then(res => this.setState({ savedBooks: res.data }))
-            .catch(err => console.log(err))
-    }
+  getBooks = () => {
+    API.getBooks()
+      .then((data) => {
+        return this.setState({ results: data.data });
+      })
+      .catch(err => console.log(err));
+  };
 
-    //function to remove book by id
-    handleDeleteButton = id => {
-        API.deleteBook(id)
-            .then(res => this.componentDidMount())
-            .catch(err => console.log(err))
-    }
+  removeBook = (id) => {
+    API.deleteBook(id)
+      .then(() => { this.getBooks() })
+      .catch(err => console.log(err));
+  };
 
-    render() {
-        return (
-            <Container fluid className="container">
-                <Jumbotron />
-                <Container>
-                    <SavedResult savedBooks={this.state.savedBooks} handleDeleteButton={this.handleDeleteButton} />
-                </Container>
-            </Container>
-        )
-    }
-}
+  componentDidMount() {
+    this.getBooks();
+  };
 
+  render() {
+    return (
+      <Container fluid>
+        <Jumbotron>
+          <h1 className="text-white">React Google Book Search</h1>
+          <h2 className="text-white">Your Saved Books</h2>
+        </Jumbotron>
+        <Container>
+          <SavedBooks saved={this.state.results} removeBook={this.removeBook} />
+        </Container>
+      </Container>
+    );
+  };
+};
 
-
-export default SaveBook 
+export default SaveBooks;
